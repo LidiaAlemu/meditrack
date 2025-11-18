@@ -10,6 +10,14 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Import routes
+const vitalLogsRoutes = require('./routes/vitalLogs');
+const medicationsRoutes = require('./routes/medications');
+
+// Use routes
+app.use('/api/vitals', vitalLogsRoutes);
+app.use('/api/medications', medicationsRoutes);
+
 // Basic route
 app.get('/', (req, res) => {
   res.json({ message: 'MediTrack API is running!' });
