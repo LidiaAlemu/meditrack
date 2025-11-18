@@ -221,7 +221,10 @@ function Dashboard() {
       <div className="bg-white rounded-lg shadow-md">
         <h3 className="text-lg font-semibold p-4 border-b">Recent Vital Logs</h3>
         {loading ? (
-          <p className="p-4 text-gray-500">Loading your health data...</p>
+            <div className="p-8 text-center">
+                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                <p className="mt-2 text-gray-500">Loading your health data...</p>
+            </div>
         ) : recentLogs.length === 0 ? (
           <p className="p-4 text-gray-500">No vital logs yet. Start tracking your health metrics in the Vital Logs tab!</p>
         ) : (
