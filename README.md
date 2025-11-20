@@ -72,7 +72,10 @@ Frontend (.env)
 
 VITE_CLERK_PUBLISHABLE_KEY=pk_test_Y2xvc2luZy1wYXJyb3QtNzAuY2xlcmsuYWNjb3VudHMuZGV2JA
 VITE_API_BASE_URL=http://localhost:5000/api
+
+
 📁 Project Structure
+
 
 meditrack/
 ├── client/                 # React frontend
@@ -87,6 +90,8 @@ meditrack/
 │   ├── middleware/        # Auth middleware
 │   └── server.js
 └── README.md
+
+
 🎨 Key Components
 
 · Dashboard: Health metrics and chart visualizations · Medications: Complete medication management · Vital Logs: Comprehensive health tracking · Authentication: Secure user login/signup
