@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: meditrack-pro
+    env: node
+    buildCommand: |
+      echo "🚀 Building MediTrack Pro..."
+      cd client && npm install && npm run build
+      cd ../server && npm install
+      echo "✅ Build completed successfully!"
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        value: your_mongodb_connection_string_here
+      - key: CLERK_SECRET_KEY
+        value: your_clerk_secret_key_here

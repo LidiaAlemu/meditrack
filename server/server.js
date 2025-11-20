@@ -28,6 +28,16 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/meditrack
   .then(() => console.log('✅ MongoDB connected successfully'))
   .catch(err => console.log('❌ MongoDB connection error:', err));
 
+const path = require('path');
+
+// Serve static files from React build
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+// Handle React routing - return all requests to React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
   console.log(`📡 API available at: http://localhost:${PORT}`);
