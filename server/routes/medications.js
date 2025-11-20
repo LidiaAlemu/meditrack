@@ -8,7 +8,7 @@ router.use(requireAuth);
 // GET all medications for current user
 router.get('/', async (req, res) => {
   try {
-    const medications = await Medication.find({ userId: req.userId }).sort({ createdAt: -1 });
+    const medications = await Medication.find({ userId: req.auth.userId }).sort({ createdAt: -1 });
     res.json(medications);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching medications', error: error.message });
@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
     const { name, dosage, frequency } = req.body;
     
     const newMedication = new Medication({
-      userId: req.userId,
+      userId: req.auth.userId,
       name,
       dosage,
       frequency
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
 // PATCH mark medication as taken/not taken
 router.patch('/:id/taken', async (req, res) => {
   try {
-    const medication = await Medication.findOne({ _id: req.params.id, userId: req.userId });
+    const medication = await Medication.findOne({ _id: req.params.id, userId: req.auth.userId });
     
     if (!medication) {
       return res.status(404).json({ message: 'Medication not found' });
@@ -58,7 +58,7 @@ router.patch('/:id/taken', async (req, res) => {
 // DELETE a medication
 router.delete('/:id', async (req, res) => {
   try {
-    const medication = await Medication.findOne({ _id: req.params.id, userId: req.userId });
+    const medication = await Medication.findOne({ _id: req.params.id, userId: req.auth.userId });
     
     if (!medication) {
       return res.status(404).json({ message: 'Medication not found' });

@@ -9,7 +9,7 @@ router.use(requireAuth);
 // GET all vital logs for current user
 router.get('/', async (req, res) => {
   try {
-    const vitalLogs = await VitalLog.find({ userId: req.userId })
+    const vitalLogs = await VitalLog.find({ userId: req.auth.userId })
       .sort({ date: -1 })
       .limit(50);
     res.json(vitalLogs);
@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
     const { systolic, diastolic, heartRate, weight, bloodSugar, notes } = req.body;
     
     const newVitalLog = new VitalLog({
-      userId: req.userId,
+      userId: req.auth.userId,
       systolic,
       diastolic,
       heartRate,
@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
 // DELETE a vital log
 router.delete('/:id', async (req, res) => {
   try {
-    const log = await VitalLog.findOne({ _id: req.params.id, userId: req.userId });
+    const log = await VitalLog.findOne({ _id: req.params.id, userId: req.auth.userId });
     
     if (!log) {
       return res.status(404).json({ message: 'Vital log not found' });
