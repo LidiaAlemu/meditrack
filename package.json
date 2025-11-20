@@ -1,0 +1,12 @@
+{
+  "name": "meditrack-pro",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd client && npm install && npm run build && cd ../server && npm install",
+    "start": "cd server && npm start"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm": "9.x"
+  }
+}
